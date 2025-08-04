@@ -1,103 +1,580 @@
-import Image from "next/image";
+'use client';
+
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ChevronRightIcon, PlayCircleIcon, AcademicCapIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing-preview');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section - Enhanced */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            poster="/Images/IMG_2257.jpg"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <source src="/Videos/IMG_2781.MOV" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {/* Enhanced overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/40" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Background Pattern Overlay */}
+        <div className="absolute inset-0 z-5 opacity-5">
+          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_2px,_transparent_2px)] bg-[length:60px_60px]" />
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            {/* Elite Training Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <span className="inline-block px-6 py-3 bg-primary/20 backdrop-blur-sm border border-primary/30 text-white font-bold rounded-full text-sm sm:text-base uppercase tracking-wide mt-16 mb-8 shadow-lg">
+                🏈 Elite Training Program
+              </span>
+            </motion.div>
+
+            {/* Main Title */}
+            <motion.h1 
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl font-heading font-bold text-white mb-6 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Welcome to{' '}
+              <span className="text-primary drop-shadow-lg">C.L.I.M.B.</span>{' '}
+              <br className="hidden sm:block" />
+              Athletics
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.div 
+              className="max-w-5xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <p className="text-xl sm:text-2xl lg:text-3xl text-gray-100 mb-6 font-medium leading-relaxed">
+                Elite Quarterback & Wide Receiver Training
+              </p>
+              <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                Developing skilled athletes and strong leaders through expert coaching, mentorship, and personalized training programs
+              </p>
+            </motion.div>
+
+            {/* Key Stats */}
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <div className="text-center">
+                <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ 
+                  background: 'linear-gradient(90deg, #ffffff 0%, #E63946 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  textShadow: 'none'
+                }}>10+</div>
+                <div className="text-sm sm:text-base font-medium drop-shadow-lg" style={{ color: '#ffffff', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Years Experience</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ 
+                  background: 'linear-gradient(90deg, #ffffff 0%, #E63946 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  textShadow: 'none'
+                }}>1:1</div>
+                <div className="text-sm sm:text-base font-medium drop-shadow-lg" style={{ color: '#ffffff', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Personal Training</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ 
+                  background: 'linear-gradient(90deg, #ffffff 0%, #E63946 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  textShadow: 'none'
+                }}>100%</div>
+                <div className="text-sm sm:text-base font-medium drop-shadow-lg" style={{ color: '#ffffff', textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}>Dedicated to Excellence</div>
+              </div>
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
+            >
+              <button
+                onClick={scrollToPricing}
+                className="group inline-flex items-center gap-3 bg-gradient-to-r from-primary to-red-600 text-white px-10 py-5 rounded-xl text-xl font-bold hover:from-red-600 hover:to-primary transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-primary/50 backdrop-blur-sm border border-primary/30"
+              >
+                <span>Start Your Journey</span>
+                <ChevronRightIcon className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+            </motion.div>
+
+            {/* Visual Separators */}
+            <motion.div 
+              className="flex justify-center items-center gap-4 mt-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
+              <div className="w-20 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
+              <div className="w-4 h-4 bg-primary rounded-full shadow-lg"></div>
+              <div className="w-20 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Preview - Enhanced */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--primary)_1px,_transparent_1px)] bg-[length:40px_40px]" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm uppercase tracking-wide mb-4">
+              Elite Training Programs
+            </span>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-accent mb-6">
+              Transform Your Game
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Elite level training designed to develop complete athletes and leaders
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 sm:px-0">
+            {/* Quarterback Training - Enhanced */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-br from-red-50 to-white border border-red-100 rounded-2xl p-8 hover:shadow-2xl hover:shadow-red-500/20 transform hover:-translate-y-3 transition-all duration-500 overflow-hidden"
+            >
+              {/* Floating Background Icon */}
+              <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+                <PlayCircleIcon className="w-24 h-24 text-primary" />
+              </div>
+              
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-primary to-red-600 rounded-2xl w-20 h-20 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <PlayCircleIcon className="w-10 h-10 text-white" />
+                </div>
+                
+                <div className="mb-4">
+                  <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-2">
+                    QUARTERBACK
+                  </span>
+                  <h3 className="text-2xl font-heading font-bold text-accent mb-2">
+                    Elite QB Training
+                  </h3>
+                  <div className="text-3xl font-bold text-primary mb-2">$50.00<span className="text-lg text-gray-500">/session</span></div>
+                </div>
+                
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Master footwork, accuracy, decision-making, and leadership skills with personalized QB development.
+                </p>
+                
+                <Link
+                  href="/programs"
+                  className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-red-600"
+                >
+                  Start Training
+                  <ChevronRightIcon className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Wide Receiver Training - Enhanced */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transform hover:-translate-y-3 transition-all duration-500 overflow-hidden"
+            >
+              {/* Floating Background Icon */}
+              <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+                <AcademicCapIcon className="w-24 h-24 text-primary" />
+              </div>
+              
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-primary to-red-600 rounded-2xl w-20 h-20 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <AcademicCapIcon className="w-10 h-10 text-white" />
+                </div>
+                
+                <div className="mb-4">
+                  <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-2">
+                    WIDE RECEIVER
+                  </span>
+                  <h3 className="text-2xl font-heading font-bold text-accent mb-2">
+                    Elite WR Training
+                  </h3>
+                  <div className="text-3xl font-bold text-primary mb-2">$50.00<span className="text-lg text-gray-500">/session</span></div>
+                </div>
+                
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Perfect route running, catching techniques, and game awareness with comprehensive WR development.
+                </p>
+                
+                <Link
+                  href="/programs"
+                  className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-red-600"
+                >
+                  Start Training
+                  <ChevronRightIcon className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Chalk Talk - Enhanced */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="group relative bg-gradient-to-br from-green-50 to-white border border-green-100 rounded-2xl p-8 hover:shadow-2xl hover:shadow-green-500/20 transform hover:-translate-y-3 transition-all duration-500 overflow-hidden"
+            >
+              {/* Floating Background Icon */}
+              <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+                <ChatBubbleLeftRightIcon className="w-24 h-24 text-primary" />
+              </div>
+              
+              <div className="relative z-10">
+                <div className="bg-gradient-to-br from-primary to-red-600 rounded-2xl w-20 h-20 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <ChatBubbleLeftRightIcon className="w-10 h-10 text-white" />
+                </div>
+                
+                <div className="mb-4">
+                  <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full mb-2">
+                    MENTAL GAME
+                  </span>
+                  <h3 className="text-2xl font-heading font-bold text-accent mb-2">
+                    Chalk Talk Sessions
+                  </h3>
+                  <div className="text-3xl font-bold text-primary mb-2">$40.00<span className="text-lg text-gray-500">/session</span></div>
+                </div>
+                
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Enhance football IQ through strategic film study and mental game development sessions.
+                </p>
+                
+                <Link
+                  href="/programs"
+                  className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-red-600"
+                >
+                  Start Learning
+                  <ChevronRightIcon className="w-4 h-4" />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial - Enhanced */}
+      <section className="py-20 bg-gradient-to-br from-gray-900 via-accent to-gray-800 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:30px_30px]" />
+        </div>
+        
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {/* Quote Icon */}
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/20 rounded-full mb-8">
+              <div className="text-6xl font-serif text-white">"</div>
+            </div>
+            
+            {/* Quote Text */}
+            <blockquote 
+              style={{ 
+                color: '#FFFFFF',
+                fontSize: 'clamp(1.25rem, 4vw, 2rem)',
+                fontWeight: '500',
+                fontStyle: 'italic',
+                lineHeight: '1.6',
+                marginBottom: '2rem',
+                paddingLeft: '1rem',
+                paddingRight: '1rem',
+                maxWidth: '56rem',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                textShadow: '3px 3px 6px rgba(0,0,0,0.9)',
+                WebkitTextFillColor: '#FFFFFF',
+                textAlign: 'center'
+              }}
+            >
+              CLIMB Athletics has truly transformed my kid's game. Coach Lowery has taught my son that 
+              it doesn't matter how far down field you can throw—being a great quarterback includes 
+              footwork, balance, pace, and strategy. It has transformed the way my son approaches 
+              training and playing.
+            </blockquote>
+            
+            {/* Attribution */}
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-12 h-0.5 bg-primary"></div>
+              <cite className="text-white text-xl font-bold tracking-wide drop-shadow-lg">MAUREEN P</cite>
+              <div className="w-12 h-0.5 bg-primary"></div>
+            </div>
+            
+            {/* Parent Label */}
+            <p className="text-gray-200 text-lg mt-2">Parent of Elite Athlete</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Media Preview */}
+      <section className="py-20 bg-neutral">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+                      <h2 className="text-4xl lg:text-5xl font-heading font-bold text-accent mb-4">
+            Our Athletes in Action
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            See our training methods and athlete development in action
+          </p>
+        </motion.div>
+
+        {/* Featured training photos - Bigger layout */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-0"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          {[
+            { src: '/Images/IMG_2219.jpg', alt: 'Elite Quarterback Training' },
+            { src: '/Images/IMG_2225.jpg', alt: 'Wide Receiver Development' },
+            { src: '/Images/IMG_2233.jpg', alt: 'Skills & Technique Training' },
+            { src: '/Images/IMG_2271.jpg', alt: 'Athletic Performance' },
+            { src: '/Images/IMG_2227.jpg', alt: 'Athletic Excellence Training' },
+            { src: '/Images/IMG_2235.jpg', alt: 'Technique Development' }
+          ].map((photo, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer hover:scale-105 transition-transform duration-300 touch-manipulation shadow-lg hover:shadow-xl relative"
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                style={{ objectPosition: 'center 30%' }}
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="text-white font-semibold text-sm sm:text-base drop-shadow-lg">
+                  {photo.alt}
+                </h3>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/media"
+              className="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-2"
+            >
+              View Full Gallery
+              <ChevronRightIcon className="w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Preview - Enhanced */}
+      <section id="pricing-preview" className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {/* Elite Pricing Badge */}
+            <span className="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full text-sm uppercase tracking-wide mb-6">
+              Elite Training Packages
+            </span>
+            
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-accent mb-6">
+              Ready to Elevate Your <span className="text-primary">Game</span>?
+            </h2>
+            <p className="text-xl sm:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
+              Every session is 1 hour in length and designed to maximize your potential with elite-level training
+            </p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-12 px-4 sm:px-0">
+              <motion.div 
+                className="bg-white rounded-xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🏈</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-heading font-bold text-accent mb-3">Quarterback Training</h3>
+                <p className="text-3xl sm:text-4xl font-bold text-primary mb-2">$50.00</p>
+                <p className="text-gray-500 text-sm">per session</p>
+              </motion.div>
+              
+              <motion.div 
+                className="bg-white rounded-xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">⚡</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-heading font-bold text-accent mb-3">Wide Receiver Training</h3>
+                <p className="text-3xl sm:text-4xl font-bold text-primary mb-2">$50.00</p>
+                <p className="text-gray-500 text-sm">per session</p>
+              </motion.div>
+              
+              <motion.div 
+                className="bg-white rounded-xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 border border-gray-100"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🧠</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-heading font-bold text-accent mb-3">Chalk Talk</h3>
+                <p className="text-3xl sm:text-4xl font-bold text-primary mb-2">$40.00</p>
+                <p className="text-gray-500 text-sm">per session</p>
+              </motion.div>
+            </div>
+
+            {/* Enhanced CTA Button */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                href="/pricing"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-red-600 text-white px-10 py-5 rounded-xl text-xl font-bold hover:from-red-600 hover:to-primary transform transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
+              >
+                <span>View All Pricing & Book Now</span>
+                <ChevronRightIcon className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </motion.div>
+            
+            {/* Additional Info */}
+            <p className="text-gray-500 text-sm mt-6 max-w-2xl mx-auto">
+              All training sessions are held in the Washington, DC metropolitan area with flexible scheduling options
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact CTA - Enhanced */}
+      <section className="py-20 bg-gradient-to-br from-gray-900 via-accent to-gray-800 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
+        </div>
+        
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {/* Badge */}
+            <span className="inline-block px-4 py-2 bg-primary/20 text-primary font-semibold rounded-full text-sm uppercase tracking-wide mb-6">
+              Ready to Start?
+            </span>
+            
+            {/* Heading */}
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight">
+              Questions? Get in touch
+            </h2>
+            
+            {/* Description */}
+            <p className="text-xl sm:text-2xl text-gray-200 mb-10 max-w-4xl mx-auto leading-relaxed">
+              Ready to start your journey with C.L.I.M.B. Athletics? We're here to help you reach your full potential.
+            </p>
+            
+            {/* Button */}
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-red-600 text-white px-10 py-5 rounded-xl text-xl font-bold hover:from-red-600 hover:to-primary transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
+            >
+              <span>Contact Us Today</span>
+              <ChevronRightIcon className="w-6 h-6" />
+            </Link>
+            
+            {/* Contact Info */}
+            <div className="mt-8 text-gray-300">
+              <p className="text-lg">
+                Email us at{' '}
+                <a 
+                  href="mailto:Climb1athletics@gmail.com" 
+                  className="text-primary hover:text-red-400 transition-colors duration-300 font-semibold"
+                >
+                  Climb1athletics@gmail.com
+                </a>
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }
