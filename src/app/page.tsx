@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import React from 'react';
 import { ChevronRightIcon, PlayCircleIcon, AcademicCapIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
 export default function Home() {
@@ -11,6 +12,56 @@ export default function Home() {
       pricingSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Force video autoplay on component mount
+  React.useEffect(() => {
+    const video = document.querySelector('video');
+    if (video) {
+      // Multiple attempts to start video
+      const startVideo = () => {
+        if (video.paused) {
+          video.play().catch(() => {
+            console.log('Effect autoplay prevented');
+          });
+        }
+      };
+      
+      // Try immediately
+      startVideo();
+      
+      // Try after delays
+      setTimeout(startVideo, 100);
+      setTimeout(startVideo, 500);
+      setTimeout(startVideo, 1000);
+      setTimeout(startVideo, 2000);
+      
+      // Add intersection observer to ensure video plays when visible
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && video.paused) {
+            startVideo();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(video);
+      
+      // Add visibility change listener
+      const handleVisibilityChange = () => {
+        if (!document.hidden && video.paused) {
+          setTimeout(startVideo, 100);
+        }
+      };
+      
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+      
+      // Cleanup
+      return () => {
+        observer.disconnect();
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      };
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -61,21 +112,42 @@ export default function Home() {
                 document.head.appendChild(style);
               }
               
-              // Force play for mobile devices
-              const playPromise = video.play();
-              if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                  // Fallback if autoplay fails - try again after user interaction
-                  console.log('Autoplay was prevented, will retry on user interaction');
+              // Immediate play attempt
+              setTimeout(() => {
+                video.play().catch(() => {
+                  console.log('Initial autoplay prevented');
                 });
-              }
+              }, 100);
             }}
             onCanPlay={(e) => {
               const video = e.target as HTMLVideoElement;
-              // Additional attempt to play when video can start playing
+              // Multiple aggressive play attempts
               video.play().catch(() => {
-                console.log('Autoplay prevented on canPlay');
+                console.log('CanPlay autoplay prevented');
               });
+              
+              // Retry after short delay
+              setTimeout(() => {
+                video.play().catch(() => {
+                  console.log('Delayed autoplay prevented');
+                });
+              }, 300);
+            }}
+            onLoadedMetadata={(e) => {
+              const video = e.target as HTMLVideoElement;
+              // Play as soon as metadata is loaded
+              video.play().catch(() => {
+                console.log('Metadata autoplay prevented');
+              });
+            }}
+            onTimeUpdate={(e) => {
+              const video = e.target as HTMLVideoElement;
+              // If video stops playing for any reason, restart it
+              if (video.paused && video.currentTime > 0) {
+                video.play().catch(() => {
+                  console.log('Resume autoplay prevented');
+                });
+              }
             }}
             onContextMenu={(e) => e.preventDefault()}
           >
