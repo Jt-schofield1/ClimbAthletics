@@ -23,7 +23,15 @@ export default function Home() {
             muted
             loop
             playsInline
+            preload="auto"
             className="w-full h-full object-cover"
+            onLoadedData={(e) => {
+              const video = e.target as HTMLVideoElement;
+              video.play().catch(() => {
+                // Fallback if autoplay fails
+                console.log('Autoplay was prevented');
+              });
+            }}
           >
             <source src="/Videos/IMG_2781.MOV" type="video/mp4" />
             Your browser does not support the video tag.
