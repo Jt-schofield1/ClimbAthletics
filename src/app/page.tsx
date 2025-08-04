@@ -199,12 +199,12 @@ export default function Home() {
           <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_2px,_transparent_2px)] bg-[length:60px_60px]" />
         </div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center -mt-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-5"
           >
             {/* Elite Training Badge */}
             <motion.div
