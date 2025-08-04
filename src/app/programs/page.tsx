@@ -8,7 +8,7 @@ export default function Programs() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section - Enhanced */}
-      <section className="relative pt-16 pb-32 md:pt-20 md:pb-40 bg-gradient-to-br from-gray-900 via-accent to-gray-800 overflow-hidden">
+      <section className="relative pt-12 pb-32 md:pt-16 md:pb-40 bg-gradient-to-br from-gray-900 via-accent to-gray-800 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
