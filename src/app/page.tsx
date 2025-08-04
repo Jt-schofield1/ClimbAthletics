@@ -204,7 +204,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-6"
           >
             {/* Elite Training Badge */}
             <motion.div
@@ -220,7 +220,7 @@ export default function Home() {
 
             {/* Main Title */}
             <motion.h1 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl font-heading font-bold text-white mb-6 leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white mb-4 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -238,10 +238,10 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <p className="text-xl sm:text-2xl lg:text-3xl text-gray-100 mb-6 font-medium leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-100 mb-4 font-medium leading-relaxed">
                 Elite Quarterback & Wide Receiver Training
               </p>
-              <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
                 Developing skilled athletes and strong leaders through expert coaching, mentorship, and personalized training programs
               </p>
             </motion.div>
