@@ -573,7 +573,7 @@ export default function Home() {
                 src={photo.src}
                 alt={photo.alt}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                style={{ objectPosition: 'center 65%' }}
+                style={{ objectPosition: 'center 35%' }}
               />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300" />
               <div className="absolute bottom-4 left-4 right-4">
