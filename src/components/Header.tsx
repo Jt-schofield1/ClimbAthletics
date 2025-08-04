@@ -38,9 +38,9 @@ export default function Header() {
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-accent"
-            onClick={() => setMobileMenuOpen(true)}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">{mobileMenuOpen ? 'Close main menu' : 'Open main menu'}</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>

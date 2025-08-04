@@ -27,9 +27,20 @@ export default function Home() {
             className="w-full h-full object-cover"
             onLoadedData={(e) => {
               const video = e.target as HTMLVideoElement;
+              // Force play for mobile devices
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                  // Fallback if autoplay fails - try again after user interaction
+                  console.log('Autoplay was prevented, will retry on user interaction');
+                });
+              }
+            }}
+            onCanPlay={(e) => {
+              const video = e.target as HTMLVideoElement;
+              // Additional attempt to play when video can start playing
               video.play().catch(() => {
-                // Fallback if autoplay fails
-                console.log('Autoplay was prevented');
+                console.log('Autoplay prevented on canPlay');
               });
             }}
           >
