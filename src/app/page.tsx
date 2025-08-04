@@ -211,8 +211,9 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-8"
             >
-              <span className="inline-block px-6 py-3 bg-primary/20 backdrop-blur-sm border border-primary/30 text-white font-bold rounded-full text-sm sm:text-base uppercase tracking-wide mb-4 shadow-lg">
+              <span className="inline-block px-5 py-2 bg-primary/20 backdrop-blur-sm border border-primary/30 text-white font-bold rounded-full text-xs sm:text-sm uppercase tracking-wide mb-6 shadow-lg">
                 🏈 Elite Training Program
               </span>
             </motion.div>
