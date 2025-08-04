@@ -72,6 +72,11 @@ export default function Contact() {
             src="/Images/IMG_2230.jpg"
             alt="Contact C.L.I.M.B. Athletics"
             className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 60%' }}
+            onError={(e) => {
+              console.log('Image failed to load');
+              e.currentTarget.style.display = 'none';
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/60" />
         </div>

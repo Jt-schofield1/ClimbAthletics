@@ -24,9 +24,43 @@ export default function Home() {
             loop
             playsInline
             preload="auto"
+            controls={false}
+            disablePictureInPicture
+            disableRemotePlayback
             className="w-full h-full object-cover"
+            style={{ 
+              pointerEvents: 'none',
+              objectFit: 'cover'
+            }}
+            webkit-playsinline="true"
+            x5-playsinline="true"
+            x5-video-player-type="h5"
+            x5-video-player-fullscreen="true"
+            x-webkit-airplay="deny"
             onLoadedData={(e) => {
               const video = e.target as HTMLVideoElement;
+              // Hide any browser controls completely
+              video.setAttribute('controls', 'false');
+              video.removeAttribute('controls');
+              video.style.setProperty('pointer-events', 'none');
+              
+              // Add CSS to hide webkit controls
+              const style = document.createElement('style');
+              style.textContent = `
+                video::-webkit-media-controls,
+                video::-webkit-media-controls-panel,
+                video::-webkit-media-controls-play-button,
+                video::-webkit-media-controls-start-playback-button,
+                video::-webkit-media-controls-overlay-play-button {
+                  display: none !important;
+                  -webkit-appearance: none;
+                }
+              `;
+              if (!document.querySelector('#video-controls-hide')) {
+                style.id = 'video-controls-hide';
+                document.head.appendChild(style);
+              }
+              
               // Force play for mobile devices
               const playPromise = video.play();
               if (playPromise !== undefined) {
@@ -43,6 +77,7 @@ export default function Home() {
                 console.log('Autoplay prevented on canPlay');
               });
             }}
+            onContextMenu={(e) => e.preventDefault()}
           >
             <source src="/Videos/IMG_2781.MOV" type="video/mp4" />
             Your browser does not support the video tag.
@@ -430,7 +465,7 @@ export default function Home() {
                 src={photo.src}
                 alt={photo.alt}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                style={{ objectPosition: 'center 30%' }}
+                style={{ objectPosition: 'center 65%' }}
               />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300" />
               <div className="absolute bottom-4 left-4 right-4">

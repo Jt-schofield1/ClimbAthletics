@@ -103,7 +103,7 @@ export default function Media() {
             src="/Images/IMG_2263.jpg"
             alt="Training Media Gallery"
             className="w-full h-full object-cover"
-            style={{ objectPosition: 'center 20%' }}
+            style={{ objectPosition: 'center 60%' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/60" />
         </div>
