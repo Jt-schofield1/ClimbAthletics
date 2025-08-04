@@ -13,42 +13,74 @@ export default function Home() {
     }
   };
 
-  // Force video autoplay on component mount
+  // Aggressive video autoplay on component mount
   React.useEffect(() => {
-    const video = document.querySelector('video');
+    const video = document.querySelector('video') as HTMLVideoElement;
     if (video) {
+      let hasStarted = false;
+      
       // Multiple attempts to start video
-      const startVideo = () => {
-        if (video.paused) {
-          video.play().catch(() => {
-            console.log('Effect autoplay prevented');
+      const startVideo = async () => {
+        if (video.paused && !hasStarted) {
+          try {
+            video.currentTime = 0;
+            await video.play();
+            hasStarted = true;
+            console.log('Video started successfully');
+          } catch {
+            console.log('Autoplay prevented, waiting for user interaction');
+          }
+        }
+      };
+      
+      // Immediate aggressive attempts
+      startVideo();
+      setTimeout(startVideo, 50);
+      setTimeout(startVideo, 100);
+      setTimeout(startVideo, 200);
+      setTimeout(startVideo, 500);
+      setTimeout(startVideo, 1000);
+      
+      // Try on any user interaction - this is crucial for mobile
+      const handleInteraction = () => {
+        if (!hasStarted) {
+          startVideo();
+          // Remove listeners after first successful start
+          events.forEach(event => {
+            document.removeEventListener(event, handleInteraction);
           });
         }
       };
       
-      // Try immediately
-      startVideo();
+      // Listen for any minimal user interaction
+      const events = ['touchstart', 'touchend', 'mousedown', 'keydown', 'scroll', 'click', 'pointerdown'];
+      events.forEach(event => {
+        document.addEventListener(event, handleInteraction, { passive: true });
+      });
       
-      // Try after delays
-      setTimeout(startVideo, 100);
-      setTimeout(startVideo, 500);
-      setTimeout(startVideo, 1000);
-      setTimeout(startVideo, 2000);
+      // Also try when window loads completely
+      if (document.readyState === 'loading') {
+        window.addEventListener('load', () => {
+          setTimeout(startVideo, 100);
+        });
+      } else {
+        setTimeout(startVideo, 100);
+      }
       
-      // Add intersection observer to ensure video plays when visible
+      // Try when video comes into view
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting && video.paused) {
-            startVideo();
+          if (entry.isIntersecting && !hasStarted) {
+            setTimeout(startVideo, 100);
           }
         });
       }, { threshold: 0.1 });
       
       observer.observe(video);
       
-      // Add visibility change listener
+      // Try when page becomes visible
       const handleVisibilityChange = () => {
-        if (!document.hidden && video.paused) {
+        if (!document.hidden && !hasStarted) {
           setTimeout(startVideo, 100);
         }
       };
@@ -59,6 +91,9 @@ export default function Home() {
       return () => {
         observer.disconnect();
         document.removeEventListener('visibilitychange', handleVisibilityChange);
+        events.forEach(event => {
+          document.removeEventListener(event, handleInteraction);
+        });
       };
     }
   }, []);
@@ -74,7 +109,7 @@ export default function Home() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             controls={false}
             disablePictureInPicture
             disableRemotePlayback
@@ -88,6 +123,8 @@ export default function Home() {
             x5-video-player-type="h5"
             x5-video-player-fullscreen="true"
             x-webkit-airplay="deny"
+            data-wf-ignore="true"
+            data-object-fit="cover"
             onLoadedData={(e) => {
               const video = e.target as HTMLVideoElement;
               // Hide any browser controls completely
@@ -112,42 +149,41 @@ export default function Home() {
                 document.head.appendChild(style);
               }
               
-              // Immediate play attempt
-              setTimeout(() => {
-                video.play().catch(() => {
-                  console.log('Initial autoplay prevented');
-                });
-              }, 100);
+              // Force play immediately
+              video.currentTime = 0;
+              video.play().catch(() => {
+                console.log('LoadedData autoplay prevented');
+              });
             }}
             onCanPlay={(e) => {
               const video = e.target as HTMLVideoElement;
-              // Multiple aggressive play attempts
+              // Force play when ready
               video.play().catch(() => {
                 console.log('CanPlay autoplay prevented');
               });
-              
-              // Retry after short delay
-              setTimeout(() => {
-                video.play().catch(() => {
-                  console.log('Delayed autoplay prevented');
-                });
-              }, 300);
+            }}
+            onCanPlayThrough={(e) => {
+              const video = e.target as HTMLVideoElement;
+              // Another opportunity to start
+              video.play().catch(() => {
+                console.log('CanPlayThrough autoplay prevented');
+              });
             }}
             onLoadedMetadata={(e) => {
               const video = e.target as HTMLVideoElement;
-              // Play as soon as metadata is loaded
+              // Try immediately when metadata loads
               video.play().catch(() => {
                 console.log('Metadata autoplay prevented');
               });
             }}
-            onTimeUpdate={(e) => {
+            onLoadStart={(e) => {
               const video = e.target as HTMLVideoElement;
-              // If video stops playing for any reason, restart it
-              if (video.paused && video.currentTime > 0) {
+              // Try as soon as loading starts
+              setTimeout(() => {
                 video.play().catch(() => {
-                  console.log('Resume autoplay prevented');
+                  console.log('LoadStart autoplay prevented');
                 });
-              }
+              }, 100);
             }}
             onContextMenu={(e) => e.preventDefault()}
           >
