@@ -24,7 +24,6 @@ export default function Home() {
             loop
             playsInline
             className="w-full h-full object-cover"
-            poster="/Images/IMG_2257.jpg"
           >
             <source src="/Videos/IMG_2781.MOV" type="video/mp4" />
             Your browser does not support the video tag.
