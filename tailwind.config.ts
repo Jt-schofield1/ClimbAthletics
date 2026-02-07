@@ -6,21 +6,8 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        primary: "#E63946",
-        accent: "#1F1F1F",
-        neutral: "#F8F8F8",
-      },
-      fontFamily: {
-        heading: ["Montserrat", "sans-serif"],
-        body: ["Open Sans", "sans-serif"],
-      },
-    },
+    extend: {},
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [],
 };
 export default config;

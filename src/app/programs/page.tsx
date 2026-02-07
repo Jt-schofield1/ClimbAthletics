@@ -2,375 +2,264 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ChevronRightIcon, PlayCircleIcon, AcademicCapIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import { ChevronRightIcon, PlayCircleIcon, AcademicCapIcon, ChatBubbleLeftRightIcon, CheckIcon } from '@heroicons/react/24/outline';
+
+const programs = [
+  {
+    icon: PlayCircleIcon,
+    title: 'Quarterback Training',
+    desc: 'Elite QB development focusing on footwork, accuracy, decision-making, and leadership skills.',
+    price: '$50.00',
+    slug: 'quarterback',
+  },
+  {
+    icon: AcademicCapIcon,
+    title: 'Wide Receiver Training',
+    desc: 'Comprehensive WR development including route running, catching techniques, and game awareness.',
+    price: '$50.00',
+    slug: 'wide-receiver',
+  },
+  {
+    icon: ChatBubbleLeftRightIcon,
+    title: 'Chalk Talk',
+    desc: 'Strategic film study and mental game development to enhance football IQ and decision-making.',
+    price: '$40.00',
+    slug: 'chalk-talk',
+  },
+];
+
+const packages = [
+  {
+    name: '3 Field Training Sessions',
+    price: '$150.00',
+    savings: 'Save $30',
+    features: ['3 one-hour field training sessions', 'Choice of QB or WR training', 'Personalized skill development plan'],
+  },
+  {
+    name: '5 Field Training Sessions',
+    price: '$200.00',
+    savings: 'Save $50',
+    features: ['5 one-hour field training sessions', 'Choice of QB or WR training', 'Progress tracking and assessment'],
+  },
+  {
+    name: '3 Field Training & 3 Chalk Talk',
+    price: '$250.00',
+    savings: 'Save $40',
+    badge: 'MOST POPULAR',
+    features: ['3 one-hour field training sessions', '3 one-hour Chalk Talk sessions', 'Complete athlete development'],
+  },
+  {
+    name: '5 Field Training & 5 Chalk Talk',
+    price: '$400.00',
+    savings: 'Save $50',
+    features: ['5 one-hour field training sessions', '5 one-hour Chalk Talk sessions', 'Comprehensive skill and mental development', 'Long-term progress tracking'],
+  },
+];
 
 export default function Programs() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section - Enhanced */}
-      <section className="relative pt-12 pb-32 md:pt-16 md:pb-40 bg-gradient-to-br from-gray-900 via-accent to-gray-800 overflow-hidden">
-        {/* Background Image */}
+      {/* Hero Section */}
+      <section className="relative pt-16 pb-32 md:pt-20 md:pb-40 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/Images/IMG_2260.jpg"
             alt="Training Programs"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
-        
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:50px_50px]" />
-        </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Badge */}
-            <span className="inline-block px-4 py-2 bg-primary/20 backdrop-blur-sm border border-primary/30 text-white font-semibold rounded-full text-sm uppercase tracking-wide mb-8 shadow-lg">
+            <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
               Elite Training Services
             </span>
-            
-            {/* Main Title */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white mb-8 leading-tight">
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
               Our <span className="text-primary">Training</span> Programs
             </h1>
-            
-            {/* Subtitle */}
-            <div className="max-w-4xl mx-auto mb-8">
-              <p className="text-xl sm:text-2xl lg:text-3xl text-gray-200 mb-6 leading-relaxed">
-                Comprehensive training programs designed for elite Quarterbacks and Wide Receivers
-              </p>
-              <p className="text-lg sm:text-xl text-gray-300 leading-relaxed">
-                Quarterback Training • Wide Receiver Training • Chalk Talk Sessions • Mentorship
-              </p>
-            </div>
-            
-            {/* Visual Elements */}
-            <div className="flex justify-center items-center gap-4 mt-12">
-              <div className="w-16 h-0.5 bg-primary"></div>
-              <div className="w-3 h-3 bg-primary rounded-full"></div>
-              <div className="w-16 h-0.5 bg-primary"></div>
-            </div>
+
+            <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
+              Comprehensive programs designed for elite Quarterbacks and Wide Receivers
+            </p>
           </motion.div>
         </div>
       </section>
 
       {/* Programs Overview */}
-      <section className="py-20 bg-neutral">
+      <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* Quarterback Training */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <PlayCircleIcon className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-2xl font-heading font-bold text-accent mb-4">
-                Quarterback Training
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Elite QB development focusing on footwork, accuracy, decision-making, and leadership skills.
-              </p>
-              <div className="text-3xl font-bold text-primary mb-4">$50.00</div>
-              <p className="text-sm text-gray-500 mb-6">Per 1-hour session</p>
-              <Link
-                href="/pricing"
-                className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300 inline-flex items-center gap-2 w-full justify-center"
-              >
-                View Pricing
-                <ChevronRightIcon className="w-4 h-4" />
-              </Link>
-            </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
+              What We Offer
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent">
+              Training Programs
+            </h2>
+          </motion.div>
 
-            {/* Wide Receiver Training */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <AcademicCapIcon className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-2xl font-heading font-bold text-accent mb-4">
-                Wide Receiver Training
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Comprehensive WR development including route running, catching techniques, and game awareness.
-              </p>
-              <div className="text-3xl font-bold text-primary mb-4">$50.00</div>
-              <p className="text-sm text-gray-500 mb-6">Per 1-hour session</p>
-              <Link
-                href="/pricing"
-                className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300 inline-flex items-center gap-2 w-full justify-center"
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+            {programs.map((program, i) => (
+              <motion.div
+                key={program.slug}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white rounded-xl shadow-sm hover:shadow-lg p-6 sm:p-8 transition-all duration-300 border border-gray-100 hover:border-primary/20 hover:-translate-y-1"
               >
-                View Pricing
-                <ChevronRightIcon className="w-4 h-4" />
-              </Link>
-            </motion.div>
+                <div className="bg-primary/10 rounded-xl w-14 h-14 flex items-center justify-center mb-5">
+                  <program.icon className="w-7 h-7 text-primary" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-heading font-bold text-accent mb-3">
+                  {program.title}
+                </h3>
+                <p className="text-gray-500 text-sm mb-4 leading-relaxed">{program.desc}</p>
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">{program.price}</div>
+                <p className="text-gray-400 text-xs mb-6">Per 1-hour session</p>
 
-            {/* Chalk Talk */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                <ChatBubbleLeftRightIcon className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-2xl font-heading font-bold text-accent mb-4">
-                Chalk Talk
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Strategic film study and mental game development to enhance football IQ and decision-making.
-              </p>
-              <div className="text-3xl font-bold text-primary mb-4">$40.00</div>
-              <p className="text-sm text-gray-500 mb-6">Per 1-hour session</p>
-              <Link
-                href="/pricing"
-                className="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300 inline-flex items-center gap-2 w-full justify-center"
-              >
-                View Pricing
-                <ChevronRightIcon className="w-4 h-4" />
-              </Link>
-            </motion.div>
+                <div className="flex gap-2">
+                  <Link
+                    href={`/programs/${program.slug}`}
+                    className="flex-1 bg-primary text-white py-2.5 rounded-lg font-semibold hover:bg-primary-dark transition-colors text-center text-sm"
+                  >
+                    Learn More
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="flex-1 border border-primary text-primary py-2.5 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors text-center text-sm"
+                  >
+                    View Pricing
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Package Deals */}
-      <section className="py-20 bg-white">
+      <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-14"
           >
-            <h2 className="text-4xl lg:text-5xl font-heading font-bold text-accent mb-4">
+            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
+              Save More
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent mb-3">
               Package Deals
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-gray-500 max-w-2xl mx-auto">
               Save money with our comprehensive training packages
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* 3 Field Training Sessions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="group bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-100 hover:border-primary/30"
-            >
-              <h3 className="text-2xl font-heading font-bold text-accent mb-4 group-hover:text-primary transition-colors duration-300">
-                3 Field Training Sessions
-              </h3>
-              <div className="text-4xl font-bold text-primary mb-2">$150.00</div>
-              <p className="text-gray-600 mb-6">Save $30 compared to individual sessions</p>
-              <ul className="space-y-2 text-gray-700 mb-6">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  3 one-hour field training sessions
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  Choice of QB or WR training
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  Personalized skill development plan
-                </li>
-              </ul>
-              <a
-                href="https://climb-athletics.square.site/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-primary text-white py-4 sm:py-5 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300 inline-flex items-center justify-center gap-2 mt-6 sm:mt-8 text-base sm:text-lg"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {packages.map((pkg, i) => (
+              <motion.div
+                key={pkg.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className={`group rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 ${
+                  pkg.badge
+                    ? 'bg-primary/5 border-2 border-primary/20 hover:border-primary/40 shadow-md hover:shadow-xl'
+                    : 'bg-white border border-gray-100 hover:border-primary/20 shadow-sm hover:shadow-lg'
+                }`}
               >
-                Book Package
-                <ChevronRightIcon className="w-4 h-4" />
-              </a>
-            </motion.div>
+                {pkg.badge && (
+                  <span className="inline-block bg-primary text-white text-[10px] font-bold px-2.5 py-1 rounded-full mb-3 shadow-sm">
+                    {pkg.badge}
+                  </span>
+                )}
+                <h3 className="text-lg font-heading font-bold text-accent mb-2 group-hover:text-primary transition-colors leading-tight">
+                  {pkg.name}
+                </h3>
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">{pkg.price}</div>
+                <p className="text-sm text-primary/70 font-medium mb-4">{pkg.savings}</p>
 
-            {/* 5 Field Training Sessions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="group bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-100 hover:border-primary/30"
-            >
-              <h3 className="text-2xl font-heading font-bold text-accent mb-4 group-hover:text-primary transition-colors duration-300">
-                5 Field Training Sessions
-              </h3>
-              <div className="text-4xl font-bold text-primary mb-2">$200.00</div>
-              <p className="text-gray-600 mb-6">Save $50 compared to individual sessions</p>
-              <ul className="space-y-2 text-gray-700 mb-6">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  5 one-hour field training sessions
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  Choice of QB or WR training
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  Progress tracking and assessment
-                </li>
-              </ul>
-              <a
-                href="https://climb-athletics.square.site/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-primary text-white py-4 sm:py-5 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300 inline-flex items-center justify-center gap-2 mt-6 sm:mt-8 text-base sm:text-lg"
-              >
-                Book Package
-                <ChevronRightIcon className="w-4 h-4" />
-              </a>
-            </motion.div>
+                <ul className="space-y-2 mb-6">
+                  {pkg.features.map((f) => (
+                    <li key={f} className="flex items-start text-xs text-gray-600">
+                      <CheckIcon className="w-3.5 h-3.5 text-primary mr-1.5 mt-0.5 flex-shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
 
-            {/* 3 Field Training & 3 Chalk Talk - MOST POPULAR */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="group relative bg-gradient-to-br from-primary/5 to-white rounded-xl shadow-lg p-8 hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 border-2 border-primary/20 hover:border-primary/50"
-            >
-              <div className="bg-gradient-to-r from-primary to-red-600 text-white text-sm font-bold px-4 py-2 rounded-full inline-block mb-4 shadow-lg">
-                MOST POPULAR
-              </div>
-              <h3 className="text-2xl font-heading font-bold text-accent mb-4 group-hover:text-primary transition-colors duration-300">
-                3 Field Training & 3 Chalk Talk
-              </h3>
-              <div className="text-4xl font-bold text-primary mb-2">$250.00</div>
-              <p className="text-gray-600 mb-6">Save $40 - Complete development package</p>
-              <ul className="space-y-2 text-gray-700 mb-6">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  3 one-hour field training sessions
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  3 one-hour Chalk Talk sessions
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  Complete athlete development
-                </li>
-              </ul>
-              <a
-                href="https://climb-athletics.square.site/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-gradient-to-r from-primary to-red-600 text-white py-4 sm:py-5 rounded-lg font-bold hover:from-red-600 hover:to-primary transition-all duration-300 inline-flex items-center justify-center gap-2 mt-6 sm:mt-8 transform hover:scale-105 shadow-lg hover:shadow-xl text-base sm:text-lg"
-              >
-                Book Popular Package
-                <ChevronRightIcon className="w-4 h-4" />
-              </a>
-            </motion.div>
-
-            {/* 5 Field Training & 5 Chalk Talk */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="group bg-white rounded-xl shadow-lg p-8 hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 border border-gray-100 hover:border-primary/30 md:col-span-2 lg:col-span-1"
-            >
-              <h3 className="text-2xl font-heading font-bold text-accent mb-4 group-hover:text-primary transition-colors duration-300">
-                5 Field Training & 5 Chalk Talk
-              </h3>
-              <div className="text-4xl font-bold text-primary mb-2">$400.00</div>
-              <p className="text-gray-600 mb-6">Save $50 - Ultimate training package</p>
-              <ul className="space-y-2 text-gray-700 mb-6">
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  5 one-hour field training sessions
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  5 one-hour Chalk Talk sessions
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  Comprehensive skill and mental development
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary mr-2">✓</span>
-                  Long-term progress tracking
-                </li>
-              </ul>
-              <a
-                href="https://climb-athletics.square.site/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-primary text-white py-4 sm:py-5 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-300 inline-flex items-center justify-center gap-2 mt-6 sm:mt-8 text-base sm:text-lg"
-              >
-                Book Ultimate Package
-                <ChevronRightIcon className="w-4 h-4" />
-              </a>
-            </motion.div>
+                <a
+                  href="https://climb-athletics.square.site/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-full py-2.5 rounded-lg font-semibold transition-colors text-sm inline-flex items-center justify-center gap-1.5 ${
+                    pkg.badge
+                      ? 'bg-primary text-white hover:bg-primary-dark shadow-sm'
+                      : 'bg-primary text-white hover:bg-primary-dark'
+                  }`}
+                >
+                  Book Package
+                  <ChevronRightIcon className="w-3.5 h-3.5" />
+                </a>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Call to Action - Enhanced */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-accent to-gray-800 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
+      {/* CTA */}
+      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
           <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
         </div>
-        
-        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center relative z-10">
+
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            {/* Badge */}
-            <span className="inline-block px-4 py-2 bg-primary/20 backdrop-blur-sm border border-primary/30 text-white font-semibold rounded-full text-sm uppercase tracking-wide mb-6 shadow-lg">
-              Start Your Journey
-            </span>
-            
-            {/* Heading */}
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
               Ready to Start <span className="text-primary">Training</span>?
             </h2>
-            
-            {/* Description */}
-            <p className="text-xl sm:text-2xl text-gray-200 mb-10 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-white/60 mb-10 max-w-3xl mx-auto">
               Every session is 1 hour in length and designed to maximize your potential
             </p>
-            
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="https://climb-athletics.square.site/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-red-600 text-white px-10 py-5 rounded-xl text-xl font-bold hover:from-red-600 hover:to-primary transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-primary/30"
+                className="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary-dark transition-all duration-300 shadow-lg"
               >
-                <span>Book Now</span>
+                Book Now
+                <ChevronRightIcon className="w-5 h-5" />
               </a>
-              <a
+              <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-3 bg-transparent border-3 border-white text-white px-10 py-5 rounded-xl text-xl font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-lg"
+                className="inline-flex items-center justify-center gap-2 border-2 border-white/30 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-white hover:text-accent transition-all duration-300"
               >
-                <span>Questions?</span>
-              </a>
+                Questions?
+              </Link>
             </div>
           </motion.div>
         </div>

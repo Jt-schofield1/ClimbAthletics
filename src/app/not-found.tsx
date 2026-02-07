@@ -6,55 +6,49 @@ import { HomeIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="max-w-2xl mx-auto px-6 lg:px-8 text-center">
+    <div className="min-h-screen bg-white flex items-center justify-center px-6">
+      <div className="max-w-md mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* 404 Number */}
-          <div className="text-8xl sm:text-9xl font-heading font-bold text-primary mb-8">
+          {/* 404 */}
+          <div className="text-8xl sm:text-9xl font-heading font-bold text-primary/20 mb-2 select-none">
             404
           </div>
-          
-          {/* Heading */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-accent mb-6">
+
+          <h1 className="text-2xl sm:text-3xl font-heading font-bold text-accent mb-3">
             Page Not Found
           </h1>
-          
-          {/* Description */}
-          <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-lg mx-auto">
-            Sorry, we couldn't find the page you're looking for. Let's get you back to training!
+
+          <p className="text-gray-500 mb-8 max-w-sm mx-auto">
+            Sorry, we couldn&apos;t find the page you&apos;re looking for. Let&apos;s get you back to training!
           </p>
-          
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/"
-              className="bg-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-2"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
             >
               <HomeIcon className="w-5 h-5" />
               Go Home
             </Link>
-            
+
             <Link
               href="/programs"
-              className="bg-white text-primary border-2 border-primary px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-primary hover:text-white transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-2"
+              className="inline-flex items-center justify-center gap-2 border-2 border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary hover:text-white transition-colors"
             >
               View Programs
-              <ChevronRightIcon className="w-5 h-5" />
+              <ChevronRightIcon className="w-4 h-4" />
             </Link>
           </div>
-          
-          {/* Additional Help */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <p className="text-gray-500 mb-4">
-              Need help finding something specific?
-            </p>
+
+          <div className="mt-10 pt-6 border-t border-gray-100">
+            <p className="text-gray-400 text-sm mb-2">Need help?</p>
             <Link
               href="/contact"
-              className="text-primary hover:text-red-700 font-medium underline transition-colors duration-300"
+              className="text-primary hover:text-primary-dark font-medium text-sm underline transition-colors"
             >
               Contact us for assistance
             </Link>
