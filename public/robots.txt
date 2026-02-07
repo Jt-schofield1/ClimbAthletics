@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.climbathletics.com
+
+# Sitemaps
+Sitemap: https://www.climbathletics.com/sitemap.xml
