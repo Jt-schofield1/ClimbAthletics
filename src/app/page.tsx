@@ -51,12 +51,12 @@ export default function Home() {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             className="bg-video w-full h-full object-cover pointer-events-none"
             onContextMenu={(e) => e.preventDefault()}
+            poster="/Images/IMG_2271.jpg"
           >
-            <source src="/Videos/IMG_2781.MOV" type="video/quicktime" />
-            <source src="/Videos/IMG_2781.MOV" type="video/mp4" />
+            <source src="/Videos/hero-bg.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
         </div>
