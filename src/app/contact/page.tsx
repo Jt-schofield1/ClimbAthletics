@@ -1,11 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import { useFadeIn } from '@/hooks/useFadeIn';
 import { EnvelopeIcon, PhoneIcon, MapPinIcon, ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
-import GoogleMap from '@/components/GoogleMap';
+
+const GoogleMap = dynamic(() => import('@/components/GoogleMap'), { ssr: false });
 
 const faqs = [
   {
@@ -36,6 +38,8 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useFadeIn();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -89,24 +93,18 @@ export default function Contact() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
-              Get In Touch
-            </span>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-[fadeInUp_0.8s_ease-out_both]">
+          <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
+            Get In Touch
+          </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
-              Contact <span className="text-primary">Us</span>
-            </h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
+            Contact <span className="text-primary">Us</span>
+          </h1>
 
-            <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
-              Ready to start your journey? Get in touch to schedule your session or ask questions.
-            </p>
-          </motion.div>
+          <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
+            Ready to start your journey? Get in touch to schedule your session or ask questions.
+          </p>
         </div>
       </section>
 
@@ -115,12 +113,7 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-3"
-            >
+            <div className="fade-in lg:col-span-3">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-accent mb-6">
                 Send Us a Message
               </h2>
@@ -205,15 +198,10 @@ export default function Contact() {
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
-            </motion.div>
+            </div>
 
             {/* Contact Information */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:col-span-2"
-            >
+            <div className="fade-in lg:col-span-2">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold text-accent mb-6">
                 Get in Touch
               </h2>
@@ -285,7 +273,7 @@ export default function Contact() {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -293,30 +281,18 @@ export default function Contact() {
       {/* Map Section */}
       <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="fade-in text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent mb-3">
               Our Location
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto">
               Based in Washington, DC — Training locations vary based on program and weather
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div className="fade-in">
             <GoogleMap
               center={{ lat: 38.907192, lng: -77.036871 }}
-              zoom={12}
               markers={[
                 {
                   position: { lat: 38.907192, lng: -77.036871 },
@@ -326,37 +302,27 @@ export default function Contact() {
               ]}
               className="w-full"
             />
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="fade-in text-center mb-12">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               FAQ
             </span>
             <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent">
               Frequently Asked Questions
             </h2>
-          </motion.div>
+          </div>
 
           <div className="space-y-3">
             {faqs.map((faq, i) => (
-              <motion.div
+              <div
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl border border-gray-100 overflow-hidden"
+                className="fade-in bg-white rounded-xl border border-gray-100 overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
@@ -376,25 +342,16 @@ export default function Contact() {
                     <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
                   </div>
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+      <section className="py-20 sm:py-24 bg-accent">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="fade-in">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
               Ready to Get <span className="text-primary">Started</span>?
             </h2>
@@ -429,7 +386,7 @@ export default function Contact() {
                 </a>
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

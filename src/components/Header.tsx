@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
@@ -95,11 +94,7 @@ export default function Header() {
             >
               {item.name}
               {isActive(item.href) && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute bottom-0 left-3 right-3 h-0.5 bg-primary rounded-full"
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
+                <div className="absolute bottom-0 left-3 right-3 h-0.5 bg-primary rounded-full" />
               )}
             </Link>
           ))}
@@ -116,44 +111,40 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile menu dropdown */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="lg:hidden absolute top-full left-0 right-0 z-[60] bg-white/95 backdrop-blur-md shadow-xl border-t border-gray-100 overflow-hidden"
-          >
-            <div className="px-4 py-3 space-y-1">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-                    isActive(item.href)
-                      ? 'text-primary bg-primary/5 border-l-4 border-primary'
-                      : 'text-accent hover:bg-gray-50 hover:text-primary border-l-4 border-transparent'
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="pt-3 pb-1 border-t border-gray-100">
-                <Link
-                  href="/pricing"
-                  className="bg-primary text-white px-6 py-3 rounded-lg text-base font-bold hover:bg-primary-dark transition-all duration-300 block text-center shadow-md w-full"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Book Now
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile menu dropdown — CSS transition instead of Framer Motion */}
+      <div
+        className={`lg:hidden absolute top-full left-0 right-0 z-[60] bg-white/95 backdrop-blur-md shadow-xl border-t border-gray-100 transition-all duration-250 ease-in-out ${
+          mobileMenuOpen
+            ? 'opacity-100 max-h-[500px] pointer-events-auto'
+            : 'opacity-0 max-h-0 pointer-events-none overflow-hidden'
+        }`}
+      >
+        <div className="px-4 py-3 space-y-1">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`flex items-center px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
+                isActive(item.href)
+                  ? 'text-primary bg-primary/5 border-l-4 border-primary'
+                  : 'text-accent hover:bg-gray-50 hover:text-primary border-l-4 border-transparent'
+              }`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <div className="pt-3 pb-1 border-t border-gray-100">
+            <Link
+              href="/pricing"
+              className="bg-primary text-white px-6 py-3 rounded-lg text-base font-bold hover:bg-primary-dark transition-all duration-300 block text-center shadow-md w-full"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Book Now
+            </Link>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useFadeIn } from '@/hooks/useFadeIn';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
 const coreValues = [
@@ -34,6 +34,8 @@ const coreValues = [
 ];
 
 export default function About() {
+  useFadeIn();
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -49,57 +51,41 @@ export default function About() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
-              Our Foundation
-            </span>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-[fadeInUp_0.8s_ease-out_both]">
+          <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
+            Our Foundation
+          </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
-              THE <span className="text-primary">C.L.I.M.B.</span>
-            </h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
+            THE <span className="text-primary">C.L.I.M.B.</span>
+          </h1>
 
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/80 mb-4 max-w-3xl mx-auto">
-              Our core values define our approach to athlete development and mentorship
-            </p>
-            <p className="text-base sm:text-lg text-white/50">
-              Character &bull; Leadership &bull; Intelligence &bull; Mentorship &bull; Balance
-            </p>
-          </motion.div>
+          <p className="text-lg sm:text-xl lg:text-2xl text-white/80 mb-4 max-w-3xl mx-auto">
+            Our core values define our approach to athlete development and mentorship
+          </p>
+          <p className="text-base sm:text-lg text-white/50">
+            Character &bull; Leadership &bull; Intelligence &bull; Mentorship &bull; Balance
+          </p>
         </div>
       </section>
 
       {/* Core Values */}
       <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
+          <div className="fade-in text-center mb-14">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               What We Stand For
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-accent">
               Core Values
             </h2>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {coreValues.map((value, i) => (
-              <motion.div
+              <div
                 key={value.letter}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl shadow-sm hover:shadow-lg p-6 transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                className={`fade-in stagger-${i + 1} bg-white rounded-xl shadow-sm hover:shadow-lg p-6 transition-all duration-300 hover:-translate-y-1 border border-gray-100`}
               >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="inline-flex items-center justify-center w-10 h-10 bg-primary text-white font-bold text-lg rounded-lg">
@@ -110,7 +96,7 @@ export default function About() {
                 <p className="text-gray-500 text-sm leading-relaxed">
                   {value.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -120,12 +106,7 @@ export default function About() {
       <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div className="fade-in">
               <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
                 Beyond the Field
               </span>
@@ -148,15 +129,9 @@ export default function About() {
                   discussions, we help each athlete reach their full potential both on and off the field.
                 </p>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg"
-            >
+            <div className="fade-in relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
               <Image
                 src="/Images/IMG_2215.jpg"
                 alt="Mentorship in action"
@@ -164,7 +139,7 @@ export default function About() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -173,13 +148,7 @@ export default function About() {
       <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg order-2 lg:order-1"
-            >
+            <div className="fade-in relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg order-2 lg:order-1">
               <Image
                 src="/Images/IMG_2220.jpg"
                 alt="Balance in training and life"
@@ -187,15 +156,9 @@ export default function About() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="order-1 lg:order-2"
-            >
+            <div className="fade-in order-1 lg:order-2">
               <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
                 Holistic Approach
               </span>
@@ -217,7 +180,7 @@ export default function About() {
                   we help athletes excel in all areas of their lives while pursuing their football goals.
                 </p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -226,12 +189,7 @@ export default function About() {
       <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div className="fade-in">
               <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
                 Athlete Wellbeing
               </span>
@@ -255,15 +213,9 @@ export default function About() {
                   throughout their journey with us.
                 </p>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg"
-            >
+            <div className="fade-in relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
               <Image
                 src="/Images/IMG_2225.jpg"
                 alt="Burnout prevention through balanced training"
@@ -271,24 +223,15 @@ export default function About() {
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+      <section className="py-20 sm:py-24 bg-accent">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="fade-in">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
               Ready to <span className="text-primary">C.L.I.M.B.</span> with Us?
             </h2>
@@ -311,7 +254,7 @@ export default function About() {
                 View Programs
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 import { XMarkIcon, CheckIcon } from '@heroicons/react/24/outline';
 
 const individualSessions = [
@@ -79,6 +79,7 @@ const paymentMethods = [
 
 export default function Pricing() {
   const [showBookingModal, setShowBookingModal] = useState(false);
+  useFadeIn();
 
   return (
     <div className="min-h-screen bg-white">
@@ -95,44 +96,32 @@ export default function Pricing() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-[fadeInUp_0.8s_ease-out_both]">
+          <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
+            Training Packages
+          </span>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
+            Pricing <span className="text-primary">Menu</span>
+          </h1>
+
+          <p className="text-lg sm:text-xl text-white/70 mb-8 max-w-3xl mx-auto">
+            Every session is 1 hour in length &bull; Individual Sessions &bull; Package Deals
+          </p>
+
+          <button
+            onClick={() => setShowBookingModal(true)}
+            className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary-dark transition-all duration-300 shadow-lg"
           >
-            <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
-              Training Packages
-            </span>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
-              Pricing <span className="text-primary">Menu</span>
-            </h1>
-
-            <p className="text-lg sm:text-xl text-white/70 mb-8 max-w-3xl mx-auto">
-              Every session is 1 hour in length &bull; Individual Sessions &bull; Package Deals
-            </p>
-
-            <button
-              onClick={() => setShowBookingModal(true)}
-              className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary-dark transition-all duration-300 shadow-lg"
-            >
-              Book Your Session
-            </button>
-          </motion.div>
+            Book Your Session
+          </button>
         </div>
       </section>
 
       {/* Individual Sessions */}
       <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
+          <div className="fade-in text-center mb-14">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               Per Session
             </span>
@@ -142,16 +131,13 @@ export default function Pricing() {
             <p className="text-gray-500 max-w-2xl mx-auto">
               Elite training designed for your specific position and goals
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6">
             {individualSessions.map((session, i) => (
-              <motion.div
+              <div
                 key={session.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group bg-white rounded-xl shadow-sm hover:shadow-lg p-6 sm:p-8 text-center transition-all duration-300 border border-gray-100 hover:border-primary/20"
+                className={`fade-in stagger-${i + 1} group bg-white rounded-xl shadow-sm hover:shadow-lg p-6 sm:p-8 text-center transition-all duration-300 border border-gray-100 hover:border-primary/20`}
               >
                 <h3 className="text-lg sm:text-xl font-heading font-bold text-accent mb-3 group-hover:text-primary transition-colors">
                   {session.name}
@@ -174,7 +160,7 @@ export default function Pricing() {
                 >
                   Book Session
                 </button>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -183,13 +169,7 @@ export default function Pricing() {
       {/* Package Deals */}
       <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
+          <div className="fade-in text-center mb-14">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               Save More
             </span>
@@ -199,16 +179,13 @@ export default function Pricing() {
             <p className="text-gray-500 max-w-2xl mx-auto">
               Save money with our comprehensive training packages
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
             {packages.map((pkg, i) => (
-              <motion.div
+              <div
                 key={pkg.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group rounded-xl p-6 sm:p-8 transition-all duration-300 ${
+                className={`fade-in stagger-${i + 1} group rounded-xl p-6 sm:p-8 transition-all duration-300 ${
                   pkg.featured
                     ? 'bg-primary/5 border-2 border-primary/30 hover:border-primary/50 shadow-md hover:shadow-xl'
                     : 'bg-white border border-gray-100 hover:border-primary/20 shadow-sm hover:shadow-lg'
@@ -228,35 +205,21 @@ export default function Pricing() {
 
                 <button
                   onClick={() => setShowBookingModal(true)}
-                  className={`w-full py-3 rounded-lg font-bold transition-colors duration-300 text-sm ${
-                    pkg.featured
-                      ? 'bg-primary text-white hover:bg-primary-dark shadow-md'
-                      : 'bg-primary text-white hover:bg-primary-dark'
-                  }`}
+                  className="w-full py-3 rounded-lg font-bold transition-colors duration-300 text-sm bg-primary text-white hover:bg-primary-dark"
                 >
                   Book Package
                 </button>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Location & Payment */}
-      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+      <section className="py-20 sm:py-24 bg-accent">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Location */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+            <div className="fade-in">
               <h3 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-4">
                 Training Location
               </h3>
@@ -271,15 +234,9 @@ export default function Pricing() {
                   environment for elite-level training and skill development.
                 </p>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Payment Methods */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
+            <div className="fade-in">
               <h3 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-4">
                 Payment Methods
               </h3>
@@ -294,7 +251,7 @@ export default function Pricing() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -331,76 +288,68 @@ export default function Pricing() {
       </section>
 
       {/* Booking Modal */}
-      <AnimatePresence>
-        {showBookingModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-            onClick={() => setShowBookingModal(false)}
+      {showBookingModal && (
+        <div
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowBookingModal(false)}
+        >
+          <div
+            className="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-center p-6 border-b border-gray-100">
-                <h2 className="text-xl font-heading font-bold text-accent">
-                  Book Your Session
-                </h2>
-                <button
-                  onClick={() => setShowBookingModal(false)}
-                  className="text-gray-400 hover:text-accent transition-colors"
-                  aria-label="Close modal"
-                >
-                  <XMarkIcon className="w-6 h-6" />
-                </button>
+            <div className="flex justify-between items-center p-6 border-b border-gray-100">
+              <h2 className="text-xl font-heading font-bold text-accent">
+                Book Your Session
+              </h2>
+              <button
+                onClick={() => setShowBookingModal(false)}
+                className="text-gray-400 hover:text-accent transition-colors"
+                aria-label="Close modal"
+              >
+                <XMarkIcon className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-5">
+              <p className="text-gray-600 text-sm">
+                Click below to access our Square booking system where you can schedule
+                sessions and make secure payments.
+              </p>
+
+              <a
+                href="https://climb-athletics.square.site/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary-dark transition-all duration-300 shadow-md w-full"
+              >
+                Open Square Booking
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <div className="bg-neutral rounded-xl p-5">
+                <h3 className="font-heading font-bold text-accent text-sm mb-3">
+                  What to expect:
+                </h3>
+                <ol className="space-y-2 text-sm text-gray-600">
+                  {[
+                    'Select your training type and package',
+                    'Choose available dates and times',
+                    'Complete secure payment through Square',
+                    'Receive confirmation and location details',
+                  ].map((step, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="text-primary font-bold mr-2">{i + 1}.</span>
+                      {step}
+                    </li>
+                  ))}
+                </ol>
               </div>
-
-              <div className="p-6 space-y-5">
-                <p className="text-gray-600 text-sm">
-                  Click below to access our Square booking system where you can schedule
-                  sessions and make secure payments.
-                </p>
-
-                <a
-                  href="https://climb-athletics.square.site/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-primary-dark transition-all duration-300 shadow-md w-full"
-                >
-                  Open Square Booking
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-
-                <div className="bg-neutral rounded-xl p-5">
-                  <h3 className="font-heading font-bold text-accent text-sm mb-3">
-                    What to expect:
-                  </h3>
-                  <ol className="space-y-2 text-sm text-gray-600">
-                    {[
-                      'Select your training type and package',
-                      'Choose available dates and times',
-                      'Complete secure payment through Square',
-                      'Receive confirmation and location details',
-                    ].map((step, i) => (
-                      <li key={i} className="flex items-start">
-                        <span className="text-primary font-bold mr-2">{i + 1}.</span>
-                        {step}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

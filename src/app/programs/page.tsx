@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useFadeIn } from '@/hooks/useFadeIn';
 import { ChevronRightIcon, PlayCircleIcon, AcademicCapIcon, ChatBubbleLeftRightIcon, CheckIcon } from '@heroicons/react/24/outline';
 
 const programs = [
@@ -58,6 +58,8 @@ const packages = [
 ];
 
 export default function Programs() {
+  useFadeIn();
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -73,53 +75,38 @@ export default function Programs() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
-              Elite Training Services
-            </span>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-[fadeInUp_0.8s_ease-out_both]">
+          <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
+            Elite Training Services
+          </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
-              Our <span className="text-primary">Training</span> Programs
-            </h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
+            Our <span className="text-primary">Training</span> Programs
+          </h1>
 
-            <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
-              Comprehensive programs designed for elite Quarterbacks and Wide Receivers
-            </p>
-          </motion.div>
+          <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
+            Comprehensive programs designed for elite Quarterbacks and Wide Receivers
+          </p>
         </div>
       </section>
 
       {/* Programs Overview */}
       <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
+          <div className="fade-in text-center mb-14">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               What We Offer
             </span>
             <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent">
               Training Programs
             </h2>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {programs.map((program, i) => (
-              <motion.div
+              <div
                 key={program.slug}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-white rounded-xl shadow-sm hover:shadow-lg p-6 sm:p-8 transition-all duration-300 border border-gray-100 hover:border-primary/20 hover:-translate-y-1"
+                className={`fade-in stagger-${i + 1} bg-white rounded-xl shadow-sm hover:shadow-lg p-6 sm:p-8 transition-all duration-300 border border-gray-100 hover:border-primary/20 hover:-translate-y-1`}
               >
                 <div className="bg-primary/10 rounded-xl w-14 h-14 flex items-center justify-center mb-5">
                   <program.icon className="w-7 h-7 text-primary" />
@@ -145,7 +132,7 @@ export default function Programs() {
                     View Pricing
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -154,13 +141,7 @@ export default function Programs() {
       {/* Package Deals */}
       <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
+          <div className="fade-in text-center mb-14">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               Save More
             </span>
@@ -170,16 +151,13 @@ export default function Programs() {
             <p className="text-gray-500 max-w-2xl mx-auto">
               Save money with our comprehensive training packages
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {packages.map((pkg, i) => (
-              <motion.div
+              <div
                 key={pkg.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 ${
+                className={`fade-in stagger-${i + 1} group rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 ${
                   pkg.badge
                     ? 'bg-primary/5 border-2 border-primary/20 hover:border-primary/40 shadow-md hover:shadow-xl'
                     : 'bg-white border border-gray-100 hover:border-primary/20 shadow-sm hover:shadow-lg'
@@ -209,34 +187,21 @@ export default function Programs() {
                   href="https://climb-athletics.square.site/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full py-2.5 rounded-lg font-semibold transition-colors text-sm inline-flex items-center justify-center gap-1.5 ${
-                    pkg.badge
-                      ? 'bg-primary text-white hover:bg-primary-dark shadow-sm'
-                      : 'bg-primary text-white hover:bg-primary-dark'
-                  }`}
+                  className="w-full py-2.5 rounded-lg font-semibold transition-colors text-sm inline-flex items-center justify-center gap-1.5 bg-primary text-white hover:bg-primary-dark"
                 >
                   Book Package
                   <ChevronRightIcon className="w-3.5 h-3.5" />
                 </a>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+      <section className="py-20 sm:py-24 bg-accent">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="fade-in">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
               Ready to Start <span className="text-primary">Training</span>?
             </h2>
@@ -261,7 +226,7 @@ export default function Programs() {
                 Questions?
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

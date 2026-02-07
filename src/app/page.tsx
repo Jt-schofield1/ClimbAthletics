@@ -1,13 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 import { ChevronRightIcon, PlayCircleIcon, AcademicCapIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  useFadeIn();
 
   const scrollToPricing = () => {
     const pricingSection = document.getElementById('pricing-preview');
@@ -25,7 +26,6 @@ export default function Home() {
       try {
         await video.play();
       } catch {
-        // Autoplay blocked - try on first user interaction
         const resume = () => {
           video.play().catch(() => {});
           document.removeEventListener('touchstart', resume);
@@ -37,11 +37,6 @@ export default function Home() {
     };
 
     tryPlay();
-
-    return () => {
-      document.removeEventListener('touchstart', () => {});
-      document.removeEventListener('click', () => {});
-    };
   }, []);
 
   return (
@@ -66,49 +61,25 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
         </div>
 
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 z-[1] opacity-[0.03]">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1.5px,_transparent_1.5px)] bg-[length:48px_48px]" />
-        </div>
-
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6 animate-[fadeInUp_0.8s_ease-out_both]">
             {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
+            <div className="animate-[fadeInUp_0.5s_ease-out_0.3s_both]">
               <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs sm:text-sm uppercase tracking-widest">
                 Elite Training Program
               </span>
-            </motion.div>
+            </div>
 
             {/* Main Title */}
-            <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white leading-[1.1]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold text-white leading-[1.1] animate-[fadeInUp_0.8s_ease-out_0.4s_both]">
               Welcome to{' '}
               <span className="text-primary">C.L.I.M.B.</span>
               <br className="hidden sm:block" />
               <span className="block sm:inline"> Athletics</span>
-            </motion.h1>
+            </h1>
 
             {/* Subtitle */}
-            <motion.div
-              className="max-w-4xl mx-auto space-y-3"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
+            <div className="max-w-4xl mx-auto space-y-3 animate-[fadeInUp_0.8s_ease-out_0.6s_both]">
               <p className="text-lg sm:text-xl lg:text-2xl text-white/90 font-medium">
                 Elite Quarterback & Wide Receiver Training
               </p>
@@ -116,36 +87,24 @@ export default function Home() {
                 Developing skilled athletes and strong leaders through expert coaching,
                 mentorship, and personalized training programs
               </p>
-            </motion.div>
+            </div>
 
             {/* Stats */}
-            <motion.div
-              className="flex flex-wrap justify-center gap-8 sm:gap-12 pt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-            >
+            <div className="flex flex-wrap justify-center gap-8 sm:gap-12 pt-4 animate-[fadeInUp_0.8s_ease-out_0.8s_both]">
               {[
                 { value: '10+', label: 'Years Experience' },
                 { value: '1:1', label: 'Personal Training' },
                 { value: '100%', label: 'Dedicated' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-white mb-1">
-                    {stat.value}
-                  </div>
+                  <div className="text-3xl sm:text-4xl font-bold text-white mb-1">{stat.value}</div>
                   <div className="text-sm text-white/60 font-medium">{stat.label}</div>
                 </div>
               ))}
-            </motion.div>
+            </div>
 
             {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-              className="pt-4"
-            >
+            <div className="pt-4 animate-[fadeInUp_0.8s_ease-out_1s_both]">
               <button
                 onClick={scrollToPricing}
                 className="group inline-flex items-center gap-3 bg-primary text-white px-8 py-4 sm:px-10 sm:py-5 rounded-xl text-lg sm:text-xl font-bold hover:bg-primary-dark transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
@@ -153,44 +112,15 @@ export default function Home() {
                 <span>Start Your Journey</span>
                 <ChevronRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
-            </motion.div>
-
-            {/* Scroll indicator */}
-            <motion.div
-              className="pt-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.4 }}
-            >
-              <div className="flex flex-col items-center gap-2 text-white/40">
-                <span className="text-xs uppercase tracking-widest">Scroll</span>
-                <motion.div
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-5 h-8 border-2 border-white/30 rounded-full flex justify-center pt-1.5"
-                >
-                  <div className="w-1 h-2 bg-white/50 rounded-full" />
-                </motion.div>
-              </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ===== SERVICES PREVIEW ===== */}
-      <section className="py-20 sm:py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--color-primary)_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
+      <section className="py-20 sm:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="fade-in text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               Elite Training Programs
             </span>
@@ -200,7 +130,7 @@ export default function Home() {
             <p className="text-lg text-gray-500 max-w-2xl mx-auto">
               Elite level training designed to develop complete athletes and leaders
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {[
@@ -235,13 +165,9 @@ export default function Home() {
                 cta: 'Start Learning',
               },
             ].map((service, i) => (
-              <motion.div
+              <div
                 key={service.tag}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className={`group relative bg-gradient-to-br ${service.color} border ${service.borderColor} rounded-2xl p-6 sm:p-8 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300`}
+                className={`fade-in stagger-${i + 1} group relative bg-gradient-to-br ${service.color} border ${service.borderColor} rounded-2xl p-6 sm:p-8 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300`}
               >
                 <div className="relative z-10">
                   <div className="bg-primary rounded-xl w-14 h-14 flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform duration-300">
@@ -271,25 +197,16 @@ export default function Home() {
                     <ChevronRightIcon className="w-4 h-4" />
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* ===== TESTIMONIAL ===== */}
-      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:30px_30px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+      <section className="py-20 sm:py-24 bg-accent">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="fade-in">
             <div className="text-5xl sm:text-6xl text-primary/30 font-serif mb-6">&ldquo;</div>
 
             <blockquote className="text-lg sm:text-xl lg:text-2xl text-white/90 font-medium italic leading-relaxed mb-8 max-w-3xl mx-auto">
@@ -305,20 +222,14 @@ export default function Home() {
               <div className="w-10 h-px bg-primary" />
             </div>
             <p className="text-white/50 text-sm mt-2">Parent of Elite Athlete</p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ===== MEDIA PREVIEW ===== */}
       <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
+          <div className="fade-in text-center mb-14">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               Gallery
             </span>
@@ -328,15 +239,9 @@ export default function Home() {
             <p className="text-lg text-gray-500 max-w-2xl mx-auto">
               See our training methods and athlete development in action
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5"
-          >
+          <div className="fade-in grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
             {[
               { src: '/Images/IMG_2219.jpg', alt: 'Elite Quarterback Training' },
               { src: '/Images/IMG_2225.jpg', alt: 'Wide Receiver Development' },
@@ -344,13 +249,9 @@ export default function Home() {
               { src: '/Images/IMG_2271.jpg', alt: 'Athletic Performance' },
               { src: '/Images/IMG_2227.jpg', alt: 'Athletic Excellence Training' },
               { src: '/Images/IMG_2235.jpg', alt: 'Technique Development' },
-            ].map((photo, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                viewport={{ once: true }}
+            ].map((photo) => (
+              <div
+                key={photo.src}
                 className="aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer shadow-md hover:shadow-xl transition-shadow duration-300 relative"
               >
                 <Image
@@ -367,9 +268,9 @@ export default function Home() {
                     {photo.alt}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
 
           <div className="text-center mt-10">
             <Link
@@ -384,18 +285,9 @@ export default function Home() {
       </section>
 
       {/* ===== PRICING PREVIEW ===== */}
-      <section id="pricing-preview" className="py-20 sm:py-24 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+      <section id="pricing-preview" className="py-20 sm:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <div className="fade-in">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               Pricing
             </span>
@@ -413,16 +305,15 @@ export default function Home() {
                 { emoji: '⚡', name: 'Wide Receiver Training', price: '$50.00' },
                 { emoji: '🧠', name: 'Chalk Talk', price: '$40.00' },
               ].map((item) => (
-                <motion.div
+                <div
                   key={item.name}
-                  className="bg-neutral rounded-xl p-6 sm:p-8 text-center border border-gray-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300"
-                  whileHover={{ y: -4 }}
+                  className="bg-neutral rounded-xl p-6 sm:p-8 text-center border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className="text-3xl mb-3">{item.emoji}</div>
                   <h3 className="text-lg sm:text-xl font-heading font-bold text-accent mb-2">{item.name}</h3>
                   <p className="text-3xl sm:text-4xl font-bold text-primary mb-1">{item.price}</p>
                   <p className="text-gray-400 text-sm">per session</p>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -437,23 +328,14 @@ export default function Home() {
             <p className="text-gray-400 text-sm mt-6 max-w-xl mx-auto">
               Training in the Washington, DC metro area with flexible scheduling
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ===== CONTACT CTA ===== */}
-      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+      <section className="py-20 sm:py-24 bg-accent">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="fade-in">
             <span className="inline-block px-4 py-1.5 bg-primary/20 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-6">
               Ready to Start?
             </span>
@@ -486,7 +368,7 @@ export default function Home() {
                 </a>
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

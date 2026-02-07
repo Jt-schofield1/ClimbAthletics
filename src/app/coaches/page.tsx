@@ -1,9 +1,9 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useFadeIn } from '@/hooks/useFadeIn';
 import { XMarkIcon, PlayIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 const coaches = [
@@ -61,6 +61,7 @@ const coaches = [
 
 export default function Coaches() {
   const [showMikeVideo, setShowMikeVideo] = useState(false);
+  useFadeIn();
 
   return (
     <div className="min-h-screen bg-white">
@@ -77,24 +78,18 @@ export default function Coaches() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
-              Expert Coaching Staff
-            </span>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-[fadeInUp_0.8s_ease-out_both]">
+          <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
+            Expert Coaching Staff
+          </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
-              Meet Our <span className="text-primary">Elite</span> Team
-            </h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
+            Meet Our <span className="text-primary">Elite</span> Team
+          </h1>
 
-            <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
-              Expert mentors with proven track records in developing elite athletes and leaders
-            </p>
-          </motion.div>
+          <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
+            Expert mentors with proven track records in developing elite athletes and leaders
+          </p>
         </div>
       </section>
 
@@ -103,12 +98,9 @@ export default function Coaches() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {coaches.map((coach, i) => (
-              <motion.div
+              <div
                 key={coach.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100"
+                className={`fade-in stagger-${i + 1} bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-100`}
               >
                 {/* Headshot */}
                 <div className="relative h-80 sm:h-96">
@@ -168,25 +160,16 @@ export default function Coaches() {
                     </button>
                   )}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+      <section className="py-20 sm:py-24 bg-accent">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="fade-in">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
               Ready to Elevate Your Game?
             </h2>
@@ -209,52 +192,44 @@ export default function Coaches() {
                 View Programs
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Mike's Video Modal */}
-      <AnimatePresence>
-        {showMikeVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-            onClick={() => setShowMikeVideo(false)}
+      {showMikeVideo && (
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowMikeVideo(false)}
+        >
+          <div
+            className="relative max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              className="relative max-w-4xl w-full"
-              onClick={(e) => e.stopPropagation()}
+            <button
+              onClick={() => setShowMikeVideo(false)}
+              className="absolute -top-12 right-0 text-white hover:text-primary transition-colors duration-300 z-10"
+              aria-label="Close video"
             >
-              <button
-                onClick={() => setShowMikeVideo(false)}
-                className="absolute -top-12 right-0 text-white hover:text-primary transition-colors duration-300 z-10"
-                aria-label="Close video"
-              >
-                <XMarkIcon className="w-8 h-8" />
-              </button>
+              <XMarkIcon className="w-8 h-8" />
+            </button>
 
-              <div className="aspect-video bg-black rounded-xl overflow-hidden">
-                <div className="w-full h-full bg-gray-900 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <PlayIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg font-medium">Mike&apos;s Introduction Video</p>
-                    <p className="text-sm text-gray-400 mt-2">Coming soon</p>
-                  </div>
+            <div className="aspect-video bg-black rounded-xl overflow-hidden">
+              <div className="w-full h-full bg-gray-900 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <PlayIcon className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg font-medium">Mike&apos;s Introduction Video</p>
+                  <p className="text-sm text-gray-400 mt-2">Coming soon</p>
                 </div>
               </div>
+            </div>
 
-              <p className="mt-4 text-center text-white font-heading font-medium">
-                Meet Coach Mike Lowery
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <p className="mt-4 text-center text-white font-heading font-medium">
+              Meet Coach Mike Lowery
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

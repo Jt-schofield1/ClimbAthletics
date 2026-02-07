@@ -1,11 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import { useFadeIn } from '@/hooks/useFadeIn';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
-import PhotoGallery from '@/components/PhotoGallery';
-import VideoPlayer from '@/components/VideoPlayer';
+
+// Lazy-load heavy components
+const PhotoGallery = dynamic(() => import('@/components/PhotoGallery'), { ssr: false });
+const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), { ssr: false });
 
 const samplePhotos = [
   { src: '/Images/IMG_2271.jpg', alt: 'Elite QB Training Session', title: 'Elite QB Training' },
@@ -66,6 +69,8 @@ const sampleVideos = [
 ];
 
 export default function Media() {
+  useFadeIn();
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -82,37 +87,25 @@ export default function Media() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
-              Media Gallery
-            </span>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center animate-[fadeInUp_0.8s_ease-out_both]">
+          <span className="inline-block px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full text-xs uppercase tracking-widest mb-8">
+            Media Gallery
+          </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
-              Training in <span className="text-primary">Action</span>
-            </h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white mb-6 leading-[1.1]">
+            Training in <span className="text-primary">Action</span>
+          </h1>
 
-            <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
-              Explore our training methods and athlete development through photos and videos
-            </p>
-          </motion.div>
+          <p className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto">
+            Explore our training methods and athlete development through photos and videos
+          </p>
         </div>
       </section>
 
       {/* Photo Gallery */}
       <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="fade-in text-center mb-12">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               Photos
             </span>
@@ -122,29 +115,18 @@ export default function Media() {
             <p className="text-gray-500 max-w-2xl mx-auto">
               Behind-the-scenes looks at our training sessions and athlete development
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <PhotoGallery photos={samplePhotos} columns={3} />
-          </motion.div>
+          <div className="fade-in">
+            <PhotoGallery photos={samplePhotos} columns={3} initialCount={12} />
+          </div>
         </div>
       </section>
 
       {/* Video Gallery */}
       <section className="py-20 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="fade-in text-center mb-12">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
               Videos
             </span>
@@ -154,15 +136,9 @@ export default function Media() {
             <p className="text-gray-500 max-w-2xl mx-auto">
               Watch our coaching methods and see the C.L.I.M.B. difference in action
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
-          >
+          <div className="fade-in grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {sampleVideos.map((video, index) => (
               <VideoPlayer
                 key={index}
@@ -171,27 +147,21 @@ export default function Media() {
                 className="aspect-video"
               />
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Training Categories */}
       <section className="py-20 sm:py-24 bg-neutral">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
+          <div className="fade-in text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent mb-3">
               What You&apos;ll See
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto">
               Our media library covers all aspects of elite football training
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
             {[
@@ -217,13 +187,9 @@ export default function Media() {
                 desc: 'Real training sessions showing athlete progression, mentorship moments, and character building.',
               },
             ].map((cat, i) => (
-              <motion.div
+              <div
                 key={cat.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl shadow-sm hover:shadow-lg p-6 sm:p-8 text-center transition-all duration-300 border border-gray-100"
+                className={`fade-in stagger-${i + 1} bg-white rounded-xl shadow-sm hover:shadow-lg p-6 sm:p-8 text-center transition-all duration-300 border border-gray-100`}
               >
                 <div className="bg-primary/10 rounded-xl w-14 h-14 flex items-center justify-center mx-auto mb-5">
                   <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,25 +198,16 @@ export default function Media() {
                 </div>
                 <h3 className="text-lg font-heading font-bold text-accent mb-3">{cat.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{cat.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-20 sm:py-24 bg-accent relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#E63946_1px,_transparent_1px)] bg-[length:40px_40px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+      <section className="py-20 sm:py-24 bg-accent">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <div className="fade-in">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
               Ready to Experience This <span className="text-primary">Training</span>?
             </h2>
@@ -273,7 +230,7 @@ export default function Media() {
                 View Programs
               </Link>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>
