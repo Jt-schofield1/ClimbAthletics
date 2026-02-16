@@ -8,7 +8,7 @@ import { XMarkIcon, CheckIcon } from '@heroicons/react/24/outline';
 const individualSessions = [
   {
     name: 'Quarterback Training',
-    price: '$50.00',
+    price: '$65.00',
     features: [
       'Elite QB development and mechanics',
       'Footwork and accuracy training',
@@ -18,7 +18,7 @@ const individualSessions = [
   },
   {
     name: 'Wide Receiver Training',
-    price: '$50.00',
+    price: '$65.00',
     features: [
       'Route running and timing',
       'Catching techniques and hands',
@@ -41,30 +41,30 @@ const individualSessions = [
 const packages = [
   {
     name: '5 Field Training & 5 Chalk Talk',
-    price: '$400.00',
-    savings: 'Save $50',
+    price: '$500.00',
+    savings: 'Save $25',
     desc: 'Complete development package combining on-field training with strategic mental game development.',
     badge: 'BEST VALUE',
     featured: true,
   },
   {
     name: '5 Field Training Sessions',
-    price: '$200.00',
-    savings: 'Save $50',
+    price: '$300.00',
+    savings: 'Save $25',
     desc: 'Focused on-field training to develop technical skills and physical abilities.',
     featured: false,
   },
   {
     name: '3 Field Training & 3 Chalk Talk',
-    price: '$250.00',
-    savings: 'Save $40',
+    price: '$300.00',
+    savings: 'Save $15',
     desc: 'Perfect introduction package for new athletes to experience both training styles.',
     featured: false,
   },
   {
     name: '3 Field Training Sessions',
-    price: '$150.00',
-    savings: 'Save $30',
+    price: '$175.00',
+    savings: 'Save $20',
     desc: 'Great starter package for athletes new to position-specific training.',
     featured: false,
   },
@@ -211,6 +211,99 @@ export default function Pricing() {
                 </button>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Group Training */}
+      <section className="py-20 sm:py-24 bg-neutral">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="fade-in text-center mb-14">
+            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider mb-4">
+              New
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-heading font-bold text-accent mb-3">
+              Group Training
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">
+              High-energy group sessions for QB &amp; WR &mdash; 15 spots per session, 1 hour 15 minutes
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            {/* Price Card */}
+            <div className="fade-in bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden mb-10">
+              <div className="bg-primary/5 border-b border-primary/10 px-6 sm:px-8 py-6 text-center">
+                <div className="text-4xl sm:text-5xl font-bold text-primary mb-1">$50</div>
+                <p className="text-gray-500 text-sm">Flat rate per athlete &bull; QB &amp; WR</p>
+              </div>
+              <div className="px-6 sm:px-8 py-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-6">
+                  <div className="bg-neutral rounded-xl p-4">
+                    <p className="text-2xl font-bold text-accent">15</p>
+                    <p className="text-gray-400 text-xs font-medium">Spots Per Session</p>
+                  </div>
+                  <div className="bg-neutral rounded-xl p-4">
+                    <p className="text-2xl font-bold text-accent">1h 15m</p>
+                    <p className="text-gray-400 text-xs font-medium">Session Duration</p>
+                  </div>
+                  <div className="bg-neutral rounded-xl p-4">
+                    <p className="text-2xl font-bold text-accent">5 Weeks</p>
+                    <p className="text-gray-400 text-xs font-medium">Program Length</p>
+                  </div>
+                </div>
+                <div className="text-center">
+                  <button
+                    onClick={() => setShowBookingModal(true)}
+                    className="inline-flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-xl font-bold hover:bg-primary-dark transition-colors duration-300 shadow-md text-sm"
+                  >
+                    Book Group Training
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Schedule */}
+            <div className="fade-in">
+              <h3 className="text-xl sm:text-2xl font-heading font-bold text-accent text-center mb-6">
+                Weekly Schedule
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+                {[
+                  {
+                    day: 'Friday',
+                    time: '5:00 PM',
+                    location: 'Sandburg Middle School',
+                    area: 'Alexandria, VA',
+                  },
+                  {
+                    day: 'Saturday',
+                    time: '10:00 AM',
+                    location: 'RFK Campus',
+                    area: 'Washington, DC',
+                  },
+                  {
+                    day: 'Sunday',
+                    time: '1:00 PM',
+                    location: 'Deal Middle School',
+                    area: 'Washington, DC',
+                  },
+                ].map((session, i) => (
+                  <div
+                    key={session.day}
+                    className={`fade-in stagger-${i + 1} bg-white rounded-xl p-5 sm:p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow text-center`}
+                  >
+                    <div className="text-sm font-bold text-primary uppercase tracking-wider mb-2">{session.day}</div>
+                    <div className="text-2xl font-bold text-accent mb-1">{session.time}</div>
+                    <p className="text-gray-600 text-sm font-medium">{session.location}</p>
+                    <p className="text-gray-400 text-xs">{session.area}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-center text-gray-400 text-sm mt-6">
+                Running every Friday, Saturday &amp; Sunday for the next 5 weeks &bull; Feb 14 &ndash; Mar 16, 2026
+              </p>
+            </div>
           </div>
         </div>
       </section>

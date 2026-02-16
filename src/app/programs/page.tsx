@@ -10,14 +10,14 @@ const programs = [
     icon: PlayCircleIcon,
     title: 'Quarterback Training',
     desc: 'Elite QB development focusing on footwork, accuracy, decision-making, and leadership skills.',
-    price: '$50.00',
+    price: '$65.00',
     slug: 'quarterback',
   },
   {
     icon: AcademicCapIcon,
     title: 'Wide Receiver Training',
     desc: 'Comprehensive WR development including route running, catching techniques, and game awareness.',
-    price: '$50.00',
+    price: '$65.00',
     slug: 'wide-receiver',
   },
   {
@@ -32,27 +32,27 @@ const programs = [
 const packages = [
   {
     name: '3 Field Training Sessions',
-    price: '$150.00',
-    savings: 'Save $30',
+    price: '$175.00',
+    savings: 'Save $20',
     features: ['3 one-hour field training sessions', 'Choice of QB or WR training', 'Personalized skill development plan'],
   },
   {
     name: '5 Field Training Sessions',
-    price: '$200.00',
-    savings: 'Save $50',
+    price: '$300.00',
+    savings: 'Save $25',
     features: ['5 one-hour field training sessions', 'Choice of QB or WR training', 'Progress tracking and assessment'],
   },
   {
     name: '3 Field Training & 3 Chalk Talk',
-    price: '$250.00',
-    savings: 'Save $40',
+    price: '$300.00',
+    savings: 'Save $15',
     badge: 'MOST POPULAR',
     features: ['3 one-hour field training sessions', '3 one-hour Chalk Talk sessions', 'Complete athlete development'],
   },
   {
     name: '5 Field Training & 5 Chalk Talk',
-    price: '$400.00',
-    savings: 'Save $50',
+    price: '$500.00',
+    savings: 'Save $25',
     features: ['5 one-hour field training sessions', '5 one-hour Chalk Talk sessions', 'Comprehensive skill and mental development', 'Long-term progress tracking'],
   },
 ];

@@ -29,7 +29,7 @@ interface ProgramData {
 const programsData: Record<string, ProgramData> = {
   quarterback: {
     title: 'Quarterback Training',
-    price: '$50.00',
+    price: '$65.00',
     icon: PlayCircleIcon,
     description: 'Elite QB development focusing on footwork, accuracy, decision-making, and leadership skills.',
     image: '/Images/IMG_2271.jpg',
@@ -74,7 +74,7 @@ const programsData: Record<string, ProgramData> = {
   },
   'wide-receiver': {
     title: 'Wide Receiver Training',
-    price: '$50.00',
+    price: '$65.00',
     icon: AcademicCapIcon,
     description: 'Comprehensive WR development including route running, catching techniques, and game awareness.',
     image: '/Images/IMG_2235.jpg',

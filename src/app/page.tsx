@@ -138,7 +138,7 @@ export default function Home() {
                 icon: PlayCircleIcon,
                 tag: 'QUARTERBACK',
                 title: 'Elite QB Training',
-                price: '$50.00',
+                price: '$65.00',
                 desc: 'Master footwork, accuracy, decision-making, and leadership skills with personalized QB development.',
                 color: 'from-red-50 to-white',
                 borderColor: 'border-red-100',
@@ -148,7 +148,7 @@ export default function Home() {
                 icon: AcademicCapIcon,
                 tag: 'WIDE RECEIVER',
                 title: 'Elite WR Training',
-                price: '$50.00',
+                price: '$65.00',
                 desc: 'Perfect route running, catching techniques, and game awareness with comprehensive WR development.',
                 color: 'from-blue-50 to-white',
                 borderColor: 'border-blue-100',
@@ -301,8 +301,8 @@ export default function Home() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 mb-12">
               {[
-                { emoji: '🏈', name: 'Quarterback Training', price: '$50.00' },
-                { emoji: '⚡', name: 'Wide Receiver Training', price: '$50.00' },
+                { emoji: '🏈', name: 'Quarterback Training', price: '$65.00' },
+                { emoji: '⚡', name: 'Wide Receiver Training', price: '$65.00' },
                 { emoji: '🧠', name: 'Chalk Talk', price: '$40.00' },
               ].map((item) => (
                 <div

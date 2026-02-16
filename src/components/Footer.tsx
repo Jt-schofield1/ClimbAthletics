@@ -7,6 +7,7 @@ const quickLinks = [
   { name: 'Coaches', href: '/coaches' },
   { name: 'Programs', href: '/programs' },
   { name: 'Pricing', href: '/pricing' },
+  { name: 'Camps', href: '/spring-break-camps' },
   { name: 'Media', href: '/media' },
   { name: 'Contact', href: '/contact' },
 ];
